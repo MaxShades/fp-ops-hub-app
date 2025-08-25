@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FP OPS HUB – App</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./app.js"></script>
+  <!-- Supabase (real‑time backend) and FullCalendar scripts -->
+  <!-- Replace the URL and anon key in app.js with your own Supabase project details -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <meta name="theme-color" content="#0b0b12" />
+</head>
+<body>
+  <!-- Application chrome/header -->
+  <header id="app-header">
+    <div class="window-controls">
+      <span class="control control-close"></span>
+      <span class="control control-minimize"></span>
+      <span class="control control-maximize"></span>
+    </div>
+    <h1>FP OPS HUB</h1>
+    <div class="toolbar">
+      <input type="search" id="global-search" placeholder="Recherche… (Ctrl+K)" />
+      <select id="filter-domain">
+        <option value="">Domaine : Tous</option>
+      </select>
+      <select id="filter-status">
+        <option value="">Statut : Tous</option>
+        <option value="new">Nouvelles</option>
+        <option value="in_discussion">En discussion</option>
+        <option value="approved">Approuvées</option>
+        <option value="rejected">Rejetées</option>
+        <option value="task">Tâches</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- Navigation bar -->
+  <nav id="app-nav">
+    <button data-view="inbox" class="active">Inbox</button>
+    <button data-view="checklist-entreprise">Checklist Entreprise</button>
+    <button data-view="checklist-dev">Checklist Dév. Site</button>
+    <button data-view="meeting">Réunion</button>
+    <button data-view="myday">Mon Jour</button>
+    <button data-view="priorities">★ Priorités</button>
+    <button data-view="calendar">Calendrier</button>
+  </nav>
+
+  <!-- Main content area -->
+  <main id="app-content">
+    <!-- Inbox view -->
+    <section id="view-inbox" class="view active">
+      <div class="view-header">
+        <h2>Inbox Idées</h2>
+        <button id="btn-add-idea" class="primary">+ Idée</button>
+      </div>
+      <div id="inbox-columns" class="columns"></div>
+    </section>
+
+    <!-- Checklist Entreprise view -->
+    <section id="view-checklist-entreprise" class="view">
+      <div class="view-header">
+        <h2>Checklist Entreprise</h2>
+        <button id="btn-add-task-entreprise" class="primary">+ Tâche</button>
+      </div>
+      <div id="list-entreprise" class="checklist"></div>
+    </section>
+
+    <!-- Checklist Dev view -->
+    <section id="view-checklist-dev" class="view">
+      <div class="view-header">
+        <h2>Checklist Dév. Site</h2>
+        <button id="btn-add-task-dev" class="primary">+ Tâche</button>
+      </div>
+      <div id="list-dev" class="checklist"></div>
+    </section>
+
+    <!-- Meeting view -->
+    <section id="view-meeting" class="view">
+      <div class="view-header">
+        <h2>Mode Réunion</h2>
+      </div>
+      <div id="meeting-card"></div>
+    </section>
+
+    <!-- My Day view -->
+    <section id="view-myday" class="view">
+      <div class="view-header">
+        <h2>Mon Jour</h2>
+      </div>
+      <div id="myday-list" class="checklist"></div>
+    </section>
+
+    <!-- Priorities view -->
+    <section id="view-priorities" class="view">
+      <div class="view-header">
+        <h2>Priorités Hebdo ★ (max 3)</h2>
+      </div>
+      <div id="priorities-list" class="checklist"></div>
+    </section>
+
+    <!-- Calendar view -->
+    <section id="view-calendar" class="view">
+      <div class="view-header">
+        <h2>Calendrier</h2>
+      </div>
+      <div id="calendar-container"></div>
+    </section>
+  </main>
+
+  <!-- Modal for adding/editing items -->
+  <div id="modal-overlay" class="hidden">
+    <div id="modal">
+      <h3 id="modal-title">Nouvel élément</h3>
+      <label>Titre<span class="required">*</span><input type="text" id="modal-title-input" /></label>
+      <label>Description<textarea id="modal-desc-input" rows="3"></textarea></label>
+      <label>Domaine<select id="modal-domain-input"></select></label>
+      <label>Tags (séparés par des virgules)<input type="text" id="modal-tags-input" placeholder="#marketing,#youtube" /></label>
+      <div id="modal-priority" class="hidden">
+        <label>Priorité<select id="modal-priority-input">
+          <option value="low">● Basse</option>
+          <option value="medium">●● Moyenne</option>
+          <option value="high">●●● Haute</option>
+        </select></label>
+      </div>
+      <div class="modal-actions">
+        <button id="modal-cancel">Annuler</button>
+        <button id="modal-save" class="primary">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notifications -->
+  <div id="toast" class="hidden"></div>
+</body>
+</html>
