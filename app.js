@@ -33,7 +33,7 @@
   // If these values are left unchanged, the application will operate in
   // offline‑only mode using localStorage. Once configured, the app will
   // sync ideas and tasks across devices in realtime.
-  const SUPABASE_URL = 'https://supabase.com/dashboard/project/yhupytjyahcgfohvrmjp';
+  const SUPABASE_URL = 'https://yhupytjyahcgfohvrmjp.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlodXB5dGp5YWhjZ2ZvaHZybWpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYxMDc4MTksImV4cCI6MjA3MTY4MzgxOX0.XXfNG9h6M2QsA61YTdOpVKR5H6IJY9vZvpzOQtAPIl0';
   let supabase = null;
   if (typeof window !== 'undefined' && window.supabase && SUPABASE_URL && SUPABASE_URL !== 'https://supabase.com/dashboard/project/yhupytjyahcgfohvrmjp') {
