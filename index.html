@@ -135,5 +135,20 @@
 
   <!-- Toast notifications -->
   <div id="toast" class="hidden"></div>
+
+  <!-- Auth overlay -->
+<div id="auth-overlay" class="modal-overlay hidden" style="display:flex;align-items:center;justify-content:center;">
+  <div class="card" style="max-width:360px;width:90%;">
+    <h3>Connexion</h3>
+    <p>Entrez votre e-mail pour recevoir un lien de connexion.</p>
+    <input id="auth-email" type="email" placeholder="email@domaine.com" style="width:100%;margin:8px 0;padding:10px;border-radius:8px;border:1px solid #333;background:#111;color:#fff;">
+    <button id="auth-send" class="btn">Recevoir le lien</button>
+    <p id="auth-info" style="opacity:.8;margin-top:8px;"></p>
+  </div>
+</div>
+
+<!-- CDN Supabase v2 (si pas déjà inclus) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </body>
 </html>
